@@ -1,0 +1,133 @@
+<%if current_user.id != @user.id %>
+<div class="view-profile-main-container">
+    <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+            <%if current_user.profile_picture.attached?%>
+                <%= image_tag current_user.profile_picture,class:"profile-picture"%><br/>
+            <%end%>
+            <p class="profile-heading"><%= current_user.first_name%></p>
+        </div>
+        <%= button_to  new_post_path,method: :get, class: "btn button-post" do%>
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+        </svg>
+        <% end %>
+    </div><hr/>
+    <div class="show-user-container">
+    <div class="d-flex flex-row">
+        <%if @user.profile_picture.attached?%>
+            <%= image_tag @user.profile_picture,class:"profile-picture2"%>
+        <%else%>
+            <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor" class="bi bi-person profile-picture2" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+            </svg><br/>
+        <%end%>
+        <div class="show-details-container">
+        <p class="show-details"><%= @user.first_name%></p>
+        <p><%= @user.date_of_birth%></p>
+        <p><%= @user.gender%></P>
+        <p><%= @user.email%></p>
+        </div>
+    </div>
+    <div class="button-container">
+    <%= form_with url: "/follows/new", method: :post do |form| %>
+        <div class="mb-3">
+            <%= form.hidden_field name="follow[follower_user_id]", value: current_user.id %>
+            <%= form.hidden_field name="follow[followed_user_id]", value: @user.id %>
+        </div> 
+        <div class="actions">
+            <%= form.submit "Follow",class:"css-button-fully-rounded--sky" %>
+        </div>
+    <% end %>
+    </div>
+    </div>
+
+
+    <div>
+    <% @user.posts.each do |userpost|%>
+        <div class="post-container">
+            <div class="d-flex flex-row">
+                <%if @user.profile_picture.attached?%>
+                    <%= image_tag @user.profile_picture,class:"profile-picture1"%><br/>
+                <%else%>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg><br/>
+                <%end%>
+                <div>
+                    <p class="user-name-post"><%= userpost.user.first_name%></p>
+                    <p class="user-location-post"><%= userpost.location%></p>
+                </div>
+            </div>
+            <hr/>
+                <%if userpost.post_picture.attached?%>
+                    <%= image_tag userpost.post_picture,class:"post-picture"%>
+                <%end%>
+                <p class="user-post-description"><%= userpost.post_description%></p>
+        </div>
+    <%end%>
+    </div>
+</div>
+<%else%>
+<div class="my-profile-container">
+    <div class="my-profile-card">
+        <div class="d-flex flex-row">
+            <%if current_user.profile_picture.attached?%>
+                <%= image_tag @user.profile_picture,class:"profile-picture2"%>
+            <%else%>
+                <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor" class="bi bi-person profile-picture2" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                </svg><br/>
+            <%end%>
+            <div class="show-details-container">
+                <p class="show-details"><%= current_user.first_name%></p>
+                <p><%= current_user.date_of_birth%></p>
+                <p><%= current_user.gender%></P>
+                <p><%= current_user.mobile_number%></p>
+                <p><%= current_user.email%></p>
+            </div>
+            <div class="main-info">
+            <%= link_to users_path do  %>
+                <p class="main-info-para">Followers: <%= current_user.followers.count%></p>
+            <%end%>
+            <%= link_to users_path do  %>
+                <p class="main-info-para">Following: <%= current_user.followings.count%></p>
+            <%end%>
+                <p class="main-info-para">Posts: <%= current_user.posts.count%></p>
+            </div>
+        </div>
+        <div class="d-flex flex-row">
+        <%= button_to "Edit your profile", edit_user_path(current_user),method: :get,class:"css-button-shadow-border-sliding--green"%>
+        <%= button_to "Back", root_path,method: :get,class:"css-button-shadow-border-sliding--red"%>
+        </div>
+    </div>
+    <div class="my-posts">
+    <% current_user.posts.each do |userpost|%>
+        <div class="post-container">
+            <div class="d-flex flex-row">
+                <%if current_user.profile_picture.attached?%>
+                    <%= image_tag @user.profile_picture,class:"profile-picture1"%><br/>
+                <%else%>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg><br/>
+                <%end%>
+                <div>
+                    <p class="user-name-post"><%= userpost.user.first_name%></p>
+                    <p class="user-location-post"><%= userpost.location%></p>
+                </div>
+            </div>
+            <hr/>
+                <%if userpost.post_picture.attached?%>
+                    <%= image_tag userpost.post_picture,class:"post-picture"%>
+                <%end%>
+                <p class="user-post-description"><%= userpost.post_description%></p>
+        </div>
+    <%end%>
+        
+    <div>
+    
+</div>
+
+<%end%>

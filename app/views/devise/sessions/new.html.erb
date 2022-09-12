@@ -1,0 +1,32 @@
+<div class="login-main-container">
+<div class="login-sub-container">
+<h2 class="login-main-heading">Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email,{ class: "form-head"}%><br />
+    <%= f.email_field :email, { class: "form-field", placeholder: "Enter your email" }  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password,{ class: "form-head"} %><br />
+    <%= f.password_field :password, { class: "form-field", placeholder: "Password" } %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div><br/>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in",class:"css-button-rounded--black" %>
+  </div>
+<% end %>
+</div>
+<div class="sign-up-container">
+<p class="form-paragraph">Don't have an account?  <%= link_to "sign_up", new_user_path%></p>
+</div>
+
+</div>

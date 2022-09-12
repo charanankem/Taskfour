@@ -1,0 +1,32 @@
+<%= form_with model: @post do |form| %>
+
+    <div class="mb-3">
+      <%= form.label :location,{ class: "form-head"} %><br>
+      <%= form.text_field :location, { class: "form-field", placeholder: "Location" } %><br>
+      <% @post.errors.full_messages_for(:location).each do |message| %>
+        <div class="red"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :post_picture,{ class: "form-head"} %><br>
+      <%= form.file_field :post_picture, { class: "form-field", placeholder: "upload image" } %><br>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :post_description,{ class: "form-head"} %><br>
+      <%= form.text_field :post_description, { class: "form-field", placeholder: "Post description" } %><br>
+      <% @post.errors.full_messages_for(:post_description).each do |message| %>
+        <div class="red"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="d-flex flex-row">
+    <div class="actions p-2">
+      <%= form.submit "Post",class:"css-button-shadow-border-sliding--grey" %>
+    </div>
+    <div class="p-2">
+    <%= button_to "Back",root_path,method: :get, class:"css-button-rounded--red" %>
+    </div>
+    </div>
+  <% end %>

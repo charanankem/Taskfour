@@ -1,0 +1,8 @@
+<%current_user.followers.each do |cu|%>
+    <%= cu.first_name%><br/>
+<%end%><br/>
+
+
+<%current_user.followings.each do |du|%>
+    <%= du.first_name%><br/>
+<%end%>

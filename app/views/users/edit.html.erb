@@ -1,0 +1,81 @@
+<div class="edit-main-container">
+<div class="details-container">
+<%= form_with model: @user do |form| %>
+      <div class="d-flex flex-row">
+      <div class="left-container">
+      <div class="mb-3">
+        <%= form.label :first_name,{ class: "form-head"} %><br>
+        <%= form.text_field :first_name,{ class: "form-field", placeholder: "First Name" } %><br>
+        <% @user.errors.full_messages_for(:first_name).each do |message| %>
+          <div class="red"><%= message %></div>
+        <% end %>
+      </div>
+  
+      <div class="mb-3">
+        <%= form.label :last_name,{ class: "form-head"} %><br>
+        <%= form.text_field :last_name,{ class: "form-field", placeholder: "Last Name" } %><br>
+        <% @user.errors.full_messages_for(:last_name).each do |message| %>
+          <div class="red"><%= message %></div>
+        <% end %>
+      </div>
+  
+      <div class="mb-3">
+        <%= form.label :mobile_number,{ class: "form-head"} %><br>
+        <%= form.text_field :mobile_number,{ class: "form-field", placeholder: "Mobile Number" } %><br>
+        <% @user.errors.full_messages_for(:mobile_number).each do |message| %>
+          <div class="red"><%= message %></div>
+        <% end %>
+      </div>
+  
+      <div class="mb-3">
+        <%= form.label :date_of_birth,{ class: "form-head"} %><br>
+        <%= form.date_field :date_of_birth,{ class: "form-field", placeholder: "Date of Birth" } %><br>
+        <% @user.errors.full_messages_for(:date_of_birth).each do |message| %>
+          <div class="red"><%= message %></div>
+        <% end %>
+      </div>
+      </div>
+
+      <div class="right-container">
+  
+      <div class="mb-3">
+        <%= form.label :gender,{ class: "form-head"} %><br>
+        <%= form.select :gender, ['Male', 'Female'],{ class: "form-field", placeholder: "Gender" }%><br/>
+        <% @user.errors.full_messages_for(:last_name).each do |message| %>
+          <div class="red"><%= message %></div>
+        <% end %>
+      </div>
+    
+      <div class="field">
+        <%= form.label :email,{ class: "form-head"} %><br />
+        <%= form.email_field :email, { class: "form-field", placeholder: "Enter your email" } %>
+      </div>
+
+      <div class="mb-3">
+            <%= form.label :profile_picture,{ class: "form-head"} %><br>
+            <%= form.file_field :profile_picture, { class: "form-field"} %><br>
+      </div>
+      <div class="d-flex flex-row">
+      <div class="actions p-2">
+        <%= form.submit "Update",class:"css-button-sliding-to-left--green" %>
+      </div>
+    <% end %>
+    <div class="p-2">
+      <%= button_to "Back", user_path(current_user),method: :get,class:"css-button-sliding-to-left--red " %>
+      </div>
+    </div>
+    </div>
+    <div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

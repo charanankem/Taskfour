@@ -1,0 +1,9 @@
+<%= form_with model: @user do |form| %>
+    <div class="mb-3">
+        <%= form.hidden_field :follower_user_id, value: current_user.id %>
+        <%= form.hidden_field :followed_user_id, value: user.id %>
+    </div> 
+    <div class="actions">
+        <%= form.submit "Follow" %>
+    </div>
+<% end %>
