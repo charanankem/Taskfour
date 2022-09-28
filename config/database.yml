@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: instaclone_production
-  username: instaclone
+  database: <%= ENV["DATABASE_URL"] %>
+  #username: instaclone
   password: <%= ENV["INSTACLONE_DATABASE_PASSWORD"] %>
