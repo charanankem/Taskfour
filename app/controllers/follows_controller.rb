@@ -25,7 +25,7 @@ class FollowsController < ApplicationController
     def destroy
         @follow = Follow.find(params[:id])
         @follow.destroy
-        redirect_to root_path, status: :see_other
+        redirect_to users_path, status: :see_other
         flash[:success] = "Follow has been destroyed succesfully"
     end
     
